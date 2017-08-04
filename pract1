@@ -1,0 +1,108 @@
+############################## DIA 1 ############################# 
+
+###### 1.- INTRODUCCION A R
+#podemos ocupar R como calculadora
+#R sabe cuanto es pi
+pi # r me genera el nÃºmero
+## Variables en R
+##operaciones aritmeticas
+a <-  4
+b <-  3
+a + b
+suma <-  a + b
+suma
+
+##operaciones de comparaciÃÂ³n
+a > b # Â¿a es mayor que b?
+a >= a # a es mayor igual que a
+a < b # Â¿a es menor que b?
+a <= b
+a == b # Â¿a es igual que b?
+a == 4
+a != b # Â¿a es diferente a b?
+
+#################
+
+## concepto de funciÃ³n
+
+x <- abs(-2.5) ## abs es la función del valor absoluto
+x
+help (abs)
+#pedir ayuda en R
+help (abs)
+
+## para asignar valores a variables en R se usa una <- 
+x <-"hola" #### variable tipo caracter
+z <-  6 # el igual solo funciona en una sola direccion
+### En este curso los objetos o variables que se utilizan son de 2 tipos: 
+# caracter y nÃÂºmerico
+ciudad <- "Toluca" # una entrada
+nombres <- c("karla","karla","Miguel","Samuel") # caracter y 4 entradad
+edad <- c(28,17,49, 31) # numerico y 4 entradas
+## se utiliza la funciÃ³n class para preguntarle a r que tipo de variable son
+class(nombres)#### tipo de variable
+class (edad)
+
+base1 <- data.frame (nombres, edad) # se crea una base de datos con 2 variables
+View (base1) ### ver la base de datos
+ls (base1) ### ver lista de variables  de base 1 
+
+base1$edad # PARA CONOCER los datos de la variable 
+      #edad de la base1
+
+###ejercicio crear una variable de nombre sexo con 4 entradas
+#donde hombre es 1 y mujer es el valor 2, la primera entrada
+## es mujer y las otras 3 son hombres
+sexo <- c (2, 1, 1, 1)
+## despues de crear esta variable generen una nueva base 
+## de nombre base 2 con 3 variables, nombres, edad y sexo
+base2 <- data.frame (nombres, edad, sexo)
+table (base2$sexo)
+table (base2$edad)
+table (base2$nombres)
+
+
+
+
+
+
+
+
+
+
+## para ver en la consola las variables creadas se utiliza la sig funciÃÂ³n
+ls() # vemos todas las variables creadas
+rm(a)
+rm (b,ciudad, z)
+###################### tabulados 
+table (nombres)
+table (edad)
+table (ciudad)
+
+## variables 
+edajuan <- 25 ## variable nÃºmerica
+ocupajuan <- "carpintero" # variable caracter
+edasofia <- 32 # var nÃºmerica
+ocupasofia<- "profesora" # var caracter
+edajuan ### mandas llamar a tu objeto
+sumedad<- edajuan + edasofia ## suma edades
+sumedad # mandas llamar un ibjeto
+sumjuan <- edajuan+ ocupajuan### marcca error por el tipo de variables
+#### variables con 2 entradas
+x <- c(0:10, 50)
+
+
+
+palumnos<- c(40, 120, 60, 80) ## alumnos fac economia
+etiq <-  c("actua", "eco", "ri", "neg")
+
+pie (palumnos)
+pie (palumnos, etiq)
+
+pie (palumnos, etiq, main = 
+       "Gráfica de pie de 
+     la facultad de economía", 
+     sub = "Fuente: facultad de economía", 
+     col = c("blue", "red", "pink", "yellow"), 
+     radius = 1.2, clockwise = TRUE,  lty = 18)
+     
