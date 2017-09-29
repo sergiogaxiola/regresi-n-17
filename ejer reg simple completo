@@ -1,0 +1,41 @@
+############### ejercicio clase ############33
+# se busca la relación de estatura (x)  con  longutud
+#del salto (y)
+
+x <- c(170, 172, 173, 174, 174, 15, 176, 177, 180, 
+       180, 180, 180, 180, 181, 181, 182, 182, 182, 182, 
+       184, 184, 185, 186, 188)
+y <- c(.84, 1.31, 1.42, 1.03, 1.07, 1.08, 1.04, 1.8, 1.45
+       , 1.60, 1.61, 2.13, 2.15, .84, 1.43, .90, 1.81, 
+       1.94, 2.68, 1.49, 2.52, 3.00, 1.87, 3.08)
+summary (y)
+datos <- data.frame (x,y)
+# 1) determine la ec de la recta de regresión estimada
+#2) calcule una estimación opuntual del salto horizontal
+# promedio cuando la estatura de la persona es de 182
+#3) calcule los valores de los residuos de min cuadrado
+# de las 4 observaciones con las cuales la estatura
+# es de 182
+# ¿que proporción de la variación observada en el 
+#salto horizontla es atribuida a la relación de reg 
+#lineal simple?
+#
+######### respuestas ####################
+
+mdo1 <- lm(y~x)
+summary (mdo1)
+### la ecuación es la siguiente
+### y= .743748 + .005362 (x)
+## cuando x = 182....
+.743748 +.005362* 182
+y = 1.719632
+#x1=182, y = .90, yajuste = 1.71, residuo = .90-1.71
+res1 = .90-1.71
+res2 = 1.81-1.71
+res3 = 1.94-1.71
+res4 = 2.68-1.71
+res1; res2; res3; res4
+plot(y~x, data = datos, xlab = "estatuira", ylab = "salto horizontal", xlim = c(160, 190), ylim = c(.80, 3.2), main="Gráfica Diagrama de Dispersión")
+abline(mdo1, col = "pink")
+summary (mdo1)
+###### hacer los calculos manual para ver si coinciden
