@@ -1,0 +1,85 @@
+# Analisis exploratorio ## del video explicar las bases y hacer el analisis exploratorio 
+
+base1 <- data.frame(Seatbelts)
+View(base)
+names(base)
+##
+pairs(base)
+## pairs grafica las variables como por pares 
+cor(base)
+### con el modelo de ayer nos basamos
+#modelo propuesto anteriormente
+nulo <- lm(Fertility~ 1, data = base)
+### modelo nulo con una constante en este caso es 1 
+## el nulo nos permitira saber cual es mejor modelo
+## es como una referencia 
+# si sale perfecto el modelo nulo quiere decir que no tiene relacion las variables independientes de dependiente
+## se quiere comparar el modelo nulo contra el completo 
+nulo
+summary(nulo)
+completo <- lm(Fertility~ ., data = base)
+## con el punto quiere decir que tenemos todas las variables independientes abrevia todos los campos 
+### mete las 5 variables independientes
+      +## es como si estuviera (fertility ~ mortality+ catholic ´+ education + agriculture+ examination)
+step(nulo,scope = list(lower= nulo,upper=completo),direction = "forward")
+# elijo el mejor modelo que obtengo del AIC
+mod1<- lm(formula = Fertility ~ Education + Catholic + Infant.Mortality + 
+     Agriculture, data = base)
+summary (mod1)
+#con la finalidad de observar aspectos bÃ¡sicos como la r cuadradad
+#ajustada que nos permite conocer la variabilidad explicada del modelo, 
+## los errores de residuos al standar 7.168 , la significancia de las 
+#variables todas son significativ
+#el estadistico F y el p-value para ver el ajuste del modelo
+#La prueba de hipotesis que se aplica en el estadistico F es 
+#Ho : B0, B1, B2, ... Bk = 0
+#ha: al menos un Bj diferente de cero
+#Aqui esperamos rechazar la hipotesis nula, por lo que el valor p-value
+#debe ser < .05 y ademas el estadistico F debe ser mayor a 1
+## Al parecer tenemos un buen modelo segun estos indicadores
+## PRUEBAS FORMALES DE LOS SUPUESTOS.... 
+####pruebas de modelo regresion multiple 
+shapiro.test (rstudent(mod1))#### prueba shapiro para normalidad
+##3 aqui esperamos no rechazar la hip nula por lo que el valor
+#de p-value debe ser mayor a .05, aqui observamos un p-value de .48
+# por lo que podemos mmencionar que no rechazamos la hip nulo, es 
+#decir, los errores se distribuyen normal
+install.packages("lmtest")
+require (lmtest)
+bptest (mod1) ### Prueba breusch pagan que permite ver autocorrelación
+#### aqui esperamos no rechazar la hip nula es decir un p-value 
+#mayor a .05, este modelo nos permite saber que no hay mas de 
+#dos variables que aporten lo mismo al modelo, en este caso 
+# tenemos un p-value .53, por lo que no rechazamos la hip
+#nula que es lo que estabamos esperando o se puede 
+#decir que este modelo si cumple el supuesto de autocorrelacion
+dwtest (mod1, alternative = "two.sided") ## prueba independencia
+summary (mod1)
+
+#la prueba t para H 0: Î² Agri = 0 frente a 
+#H a: Î² AgriÌ¸! = 0 es significativa ya que 0.0187 es
+#meno que .05
+## interpretacion de coeficientes
+#El modelo elegido  estima que hay una disminuciÃ³n de 0.15 
+#en la tasa de fecundidad por cada aumento de 1 por ciento de hombres 
+#involucrados en la agricultura manteniendo constantes 
+#las variables restantes.
+#Agriculture... -0.1546 ... coeficientye
+#el modelo elegido  estima que hay una disminuciÃ³n de 0.98 
+#en la tasa de fecundidad cada aumento de 1 por ciento de la educaciÃ³n 
+# manteniendo constantes las variables restantes.
+#Education... -0.9802 ... coeficiente
+#el modelo elegido  estima que hay una incremento de 0.12 
+#en la tasa de fecundidad cada aumento de 1 por ciento de la pob 
+# catolica  manteniendo constantes las variables restantes.
+#catholic... 0.1202 ... coeficiente
+#el modelo elegido  estima que hay una incremento de 1.07 
+#en la tasa de fecundidad cada aumento de 1 por ciento de mortalidad
+#infantil manteniendo constantes las variables restantes.
+#infant mortality... 1.07 ... coeficiente
+
+
+
+
+
+
